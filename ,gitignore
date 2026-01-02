@@ -4,3 +4,5 @@ app — kopia.py
 logs.log
 nadanie_clustrom_nazw_human_friendly_cluters.ipynb
 trenowanie_modelu_ai__clustering.ipynb
+packages.txt
+app1.py

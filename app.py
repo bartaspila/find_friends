@@ -4,6 +4,11 @@
 
 import streamlit as st
 st.set_page_config(page_title="Wyszukaj znajomych", layout="wide")
+
+# ustawienie dark mode
+if "dark_mode" not in st.session_state:
+    st.session_state.dark_mode = True  # domyślnie dark
+
 import pandas as pd  # type: ignore
 from pycaret.clustering import load_model, predict_model  # type: ignore
 import plotly.express as px  # type: ignore
@@ -34,6 +39,80 @@ def get_all_participants():
     return df_with_clusters
 
 with st.sidebar:
+    st.sidebar.header("Ustawienie trybu wyświetlania")
+    st.session_state.dark_mode = st.sidebar.checkbox("Dark Mode", st.session_state.dark_mode)
+    if st.session_state.dark_mode:
+        bg_color = "#1E1E2F"
+        secondary_bg = "#2C2C3E"
+        text_color = "#E5E5E5"
+        sidebar_text = "#E5E5E5"
+        metric_text_color = "#E5E5E5"
+    else:
+        bg_color = "#FFFFFF"
+        secondary_bg = "#F0F0F0"   # lekko szary sidebar
+        text_color = "#111111"
+        sidebar_text = "#111111"
+        metric_text_color = "#111111"
+
+#     # --- CSS ---
+#     st.markdown(
+#     f"""
+#     <style>
+#     .stApp {{
+#         background-color: {bg_color};
+#         color: {text_color};
+#     }}
+#     .stSidebar {{
+#         background-color: {secondary_bg};
+#         color: {sidebar_text};
+#     }}
+#     .stSidebar h1, .stSidebar h2, .stSidebar h3, .stSidebar label, .stSidebar .css-1v3fvcr {{
+#         color: {sidebar_text} !important;
+#     }}
+   
+
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
+#     #===== METRIC FINAL FIX (CSS VARIABLE) =====
+
+#     div[data-testid="stMetric"] {
+#         --metric-value-color: {metric_text_color} !important;
+#         --metric-label-color: {metric_text_color} !important;
+# }
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-color: {bg_color};
+            color: {text_color};
+        }}
+
+        .stSidebar {{
+            background-color: {secondary_bg};
+            color: {sidebar_text};
+        }}
+
+        .stSidebar h1,
+        .stSidebar h2,
+        .stSidebar h3,
+        .stSidebar label {{
+            color: {sidebar_text} !important;
+        }}
+
+        /* ===== METRIC FINAL FIX ===== */
+        div[data-testid="stMetric"] {{
+            --metric-value-color: {metric_text_color} !important;
+            --metric-label-color: {metric_text_color} !important;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+# opcje w sidebarze
     st.header("Powiedz nam coś o sobie")
     st.markdown("Pomożemy Ci znaleźć osoby, które mają podobne zainteresowania")
     age = st.selectbox("Wiek", ['<18', '18-24', '25-34', '35-44', '45-54', '55-64', '>=65', 'unknown'])

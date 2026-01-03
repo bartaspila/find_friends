@@ -81,35 +81,35 @@ with st.sidebar:
 #         --metric-value-color: {metric_text_color} !important;
 #         --metric-label-color: {metric_text_color} !important;
 # }
-    # st.markdown(
-    #     f"""
-    #     <style>
-    #     .stApp {{
-    #         background-color: {bg_color};
-    #         color: {text_color};
-    #     }}
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-color: {bg_color};
+            color: {text_color};
+        }}
 
-    #     .stSidebar {{
-    #         background-color: {secondary_bg};
-    #         color: {sidebar_text};
-    #     }}
+        .stSidebar {{
+            background-color: {secondary_bg};
+            color: {sidebar_text};
+        }}
 
-    #     .stSidebar h1,
-    #     .stSidebar h2,
-    #     .stSidebar h3,
-    #     .stSidebar label {{
-    #         color: {sidebar_text} !important;
-    #     }}
+        .stSidebar h1,
+        .stSidebar h2,
+        .stSidebar h3,
+        .stSidebar label {{
+            color: {sidebar_text} !important;
+        }}
 
-    #     /* ===== METRIC FINAL FIX ===== */
-    #     div[data-testid="stMetric"] {{
-    #         --metric-value-color: {metric_text_color} !important;
-    #         --metric-label-color: {metric_text_color} !important;
-    #     }}
-    #     </style>
-    #     """,
-    #     unsafe_allow_html=True
-    # )
+        /* ===== METRIC FINAL FIX ===== */
+        div[data-testid="stMetric"] {{
+            --metric-value-color: {metric_text_color} !important;
+            --metric-label-color: {metric_text_color} !important;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 
 
 # opcje w sidebarze
@@ -184,35 +184,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 st.title("🤝 Wyszukaj znajomych – analiza danych")
-st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-color: {bg_color};
-            color: {text_color};
-        }}
 
-        .stSidebar {{
-            background-color: {secondary_bg};
-            color: {sidebar_text};
-        }}
-
-        .stSidebar h1,
-        .stSidebar h2,
-        .stSidebar h3,
-        .stSidebar label {{
-            color: {sidebar_text} !important;
-        }}
-
-        /* ===== METRIC FINAL FIX ===== */
-        div[data-testid="stMetric"] {{
-            --metric-value-color: {metric_text_color} !important;
-            --metric-label-color: {metric_text_color} !important;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
 st.header(f"Najbliżej Ci do grupy: {predicted_cluster_data['name']}")
 st.markdown(predicted_cluster_data['description'])
 same_cluster_df = all_df[all_df["Cluster"] == predicted_cluster_id]
